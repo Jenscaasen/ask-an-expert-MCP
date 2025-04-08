@@ -1,0 +1,19 @@
+{
+  "name": "ask-an-expert-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for asking an AI expert questions",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "node -e \"require('fs').chmodSync('index.js', '755')\"",
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["mcp", "ai", "expert"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.9.0",
+    "axios": "^1.8.4"
+  }
+}
