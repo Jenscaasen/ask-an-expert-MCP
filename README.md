@@ -2,6 +2,10 @@
 
 This is an MCP (Model Context Protocol) server that allows you to ask questions to an OpenAI-compatible API endpoint.
 
+## Intended Use
+While smaller and cheaper models can do 90% of the work, they might get stuck at some point. Using the huge context sizes of agentic coding assistants
+such as Roo Coder or CLINE with expesive models does not justify the price in all cases. This MCP lets cheaper models ask specific questions without paying for a a big context to an expert model.
+
 ## Overview
 
 The server exposes a single tool:
@@ -9,7 +13,24 @@ The server exposes a single tool:
 
 ## Installation
 
-1. Clone this repository
+1. Clone this repository:
+
+   Prerequisites:
+   - Ensure you have Git installed on your system
+   - Open a terminal or command prompt
+
+   Using HTTPS:
+   ```bash
+   git clone https://github.com/Jenscaasen/ask-an-expert-MCP.git
+   cd ask-an-expert-MCP
+   ```
+
+   Using SSH (requires SSH key setup):
+   ```bash
+   git clone git@github.com:Jenscaasen/ask-an-expert-MCP.git
+   cd ask-an-expert-MCP
+   ```
+
 2. Install dependencies:
    ```
    npm install
