@@ -4,7 +4,17 @@ This is an MCP (Model Context Protocol) server that allows you to ask questions 
 
 ## Intended Use
 While smaller and cheaper models can do 90% of the work, they might get stuck at some point. Using the huge context sizes of agentic coding assistants
-such as Roo Coder or CLINE with expesive models does not justify the price in all cases. This MCP lets cheaper models ask specific questions without paying for a a big context to an expert model.
+such as Roo Code or CLINE with expensive models does not justify the price in all cases. This MCP lets cheaper models ask specific questions without paying for a big context to an expert model.
+
+## Using with Roo Code / CLINE
+Add this to your Custom Instructions for All Modes:
+
+> When you are stuck and cannot fix a bug, are unfamiliar with a concept or your knowledge is lacking, then use the "Ask Expert" MCP Server by asking a detailed question including:
+> - What the goal is
+> - What you tried
+> - What the problem is
+> 
+> Add as much information as needed into the question.
 
 ## Overview
 
