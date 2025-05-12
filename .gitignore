@@ -1,7 +1,7 @@
 # Dependency directories
 node_modules/
 
-.roo
+.roo/
 
 # Logs
 logs
@@ -34,3 +34,4 @@ coverage/
 # OS specific files
 .DS_Store
 Thumbs.db
+package-lock.json
