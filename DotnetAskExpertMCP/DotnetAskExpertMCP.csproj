@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>8c07bfd4-3ad7-42ea-bb08-66dc2e26d3a0</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.4" />
+    <PackageReference Include="ModelContextProtocol" Version="0.2.0-preview.2" />
+    <PackageReference Include="ModelContextProtocol.AspNetCore" Version="0.2.0-preview.2" />
+  </ItemGroup>
+
+</Project>

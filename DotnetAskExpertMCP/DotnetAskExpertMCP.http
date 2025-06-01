@@ -1,0 +1,6 @@
+@DotnetAskExpertMCP_HostAddress = http://localhost:5225
+
+GET {{DotnetAskExpertMCP_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
