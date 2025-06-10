@@ -26,7 +26,7 @@ var app = builder.Build();
 // Add the authentication token middleware before MCP
 app.UseMiddleware<AuthTokenMiddleware>();
 
-app.MapMcp();
+app.MapMcp("/mcp");
 
 app.Run();
 

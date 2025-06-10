@@ -1,6 +1,7 @@
 using DotnetAskExpertMCP.Models;
 using ModelContextProtocol.Server;
 using ModelContextProtocol.Protocol;
+using ModelContextProtocol;
 using System.ComponentModel;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -33,7 +34,7 @@ public sealed class AskExpertTools
         [Description("The question to ask the AI expert")] string question)
     {
         if (string.IsNullOrWhiteSpace(question))
-            throw new ArgumentException("Question cannot be empty", nameof(question));
+            throw new McpException("Question cannot be empty");
 
         var payload = new
         {
@@ -54,10 +55,10 @@ public sealed class AskExpertTools
         [Description("Image URL, local file path, or base64 encoded image string")] string image)
     {
         if (string.IsNullOrWhiteSpace(prompt))
-            throw new ArgumentException("Prompt cannot be empty", nameof(prompt));
+            throw new McpException("Prompt cannot be empty");
             
         if (string.IsNullOrWhiteSpace(image))
-            throw new ArgumentException("Image cannot be empty", nameof(image));
+            throw new McpException("Image cannot be empty");
 
         var processedImageUrl = await ProcessImageInput(image);
         
@@ -92,7 +93,7 @@ public sealed class AskExpertTools
         if (imageString.StartsWith("data:image"))
         {
             if (!Regex.IsMatch(imageString, @"^data:image\/[a-zA-Z]+;base64,"))
-                throw new ArgumentException("Invalid base64 data URI format.");
+                throw new McpException("Invalid base64 data URI format.");
             return imageString;
         }
 
@@ -110,13 +111,13 @@ public sealed class AskExpertTools
                 var mimeType = GetMimeType(imageString, response.Content.Headers.ContentType?.MediaType);
                 
                 if (!mimeType.StartsWith("image/"))
-                    throw new ArgumentException($"Downloaded content from {imageString} is not a recognized image type (MIME: {mimeType}).");
+                    throw new McpException($"Downloaded content from {imageString} is not a recognized image type (MIME: {mimeType}).");
                     
                 return $"data:{mimeType};base64,{base64Data}";
             }
-            catch (Exception ex) when (!(ex is ArgumentException))
+            catch (Exception ex) when (!(ex is McpException))
             {
-                throw new InvalidOperationException($"Failed to download image from URL: {imageString}. {ex.Message}", ex);
+                throw new McpException($"Failed to download image from URL: {imageString}. {ex.Message}");
             }
         }
 
@@ -130,13 +131,13 @@ public sealed class AskExpertTools
                 var mimeType = GetMimeType(imageString);
                 
                 if (!mimeType.StartsWith("image/"))
-                    throw new ArgumentException($"File {imageString} is not a recognized image type (MIME determined as: {mimeType}).");
+                    throw new McpException($"File {imageString} is not a recognized image type (MIME determined as: {mimeType}).");
                     
                 return $"data:{mimeType};base64,{base64Data}";
             }
-            catch (Exception ex) when (!(ex is ArgumentException))
+            catch (Exception ex) when (!(ex is McpException))
             {
-                throw new InvalidOperationException($"Error reading image file {imageString}: {ex.Message}", ex);
+                throw new McpException($"Error reading image file {imageString}: {ex.Message}");
             }
         }
 
@@ -147,7 +148,7 @@ public sealed class AskExpertTools
             return $"data:image/jpeg;base64,{imageString}"; // Default to JPEG for raw base64
         }
 
-        throw new ArgumentException($"Invalid image string: not a valid data URI, URL, existing file path, or recognizable raw base64 string. Please check the input: \"{imageString.Substring(0, Math.Min(100, imageString.Length))}...\"");
+        throw new McpException($"Invalid image string: not a valid data URI, URL, existing file path, or recognizable raw base64 string. Please check the input: \"{imageString.Substring(0, Math.Min(100, imageString.Length))}...\"");
     }
 
     private static bool IsValidUrl(string urlString)
@@ -176,7 +177,7 @@ public sealed class AskExpertTools
     {
         var token = _authTokenProvider.GetToken();
         if (string.IsNullOrEmpty(token))
-            throw new UnauthorizedAccessException("No authorization token found. MCP client must provide a Bearer token for API access.");
+            throw new McpException("No authorization token found. MCP client must provide a Bearer token for API access.");
 
         return token;
     }
@@ -214,15 +215,15 @@ public sealed class AskExpertTools
                 return messageContent.GetString() ?? "No response content";
             }
             
-            throw new InvalidOperationException("Unexpected API response format from AI service.");
+            throw new McpException("Unexpected API response format from AI service.");
         }
         catch (HttpRequestException ex)
         {
-            throw new InvalidOperationException($"API error: {ex.Message}", ex);
+            throw new McpException($"API error: {ex.Message}");
         }
         catch (JsonException ex)
         {
-            throw new InvalidOperationException($"JSON parsing error: {ex.Message}", ex);
+            throw new McpException($"JSON parsing error: {ex.Message}");
         }
     }
 }

@@ -596,3 +596,5 @@ DotnetAskExpertMCP/refresh-intellisense.sh
 DEPLOYMENT.md
 deploy.sh
 release.zip
+DotnetAskExpertMCP/appsettings.Development.json
+appsettings.Development.json
