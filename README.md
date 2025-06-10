@@ -5,7 +5,7 @@ A Model Context Protocol (MCP) server that provides AI expert consultation tools
 ## Authentication
 
 This MCP server uses **client-side authentication** where the API key is provided by the MCP client via the Authorization header. The server extracts the bearer token from the request and uses it to authenticate with the target AI API.
-
+ 
 ## Configuration
 
 ### Server Configuration
