@@ -593,3 +593,6 @@ docker-compose.override.yml
 # Local configuration files
 config.local.*
 DotnetAskExpertMCP/refresh-intellisense.sh
+DEPLOYMENT.md
+deploy.sh
+release.zip

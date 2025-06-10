@@ -56,7 +56,7 @@ To deploy the application, simply run:
 
 1. **Authentication Error**
    ```bash
-   # Re-login to Azure
+   # Re-login to Azure 
    az login
    az account set --subscription "IUG-AI-OpenAI"
    ```

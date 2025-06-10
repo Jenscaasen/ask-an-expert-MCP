@@ -12,7 +12,7 @@ APP_NAME="iu-ask-expert-mcp"
 PROJECT_PATH="./DotnetAskExpertMCP"
 PUBLISH_PATH="./publish"
 ZIP_FILE="release.zip"
-
+ 
 echo "🚀 Starting deployment to Azure App Service..."
 echo "📋 Configuration:"
 echo "   Subscription: $SUBSCRIPTION"
