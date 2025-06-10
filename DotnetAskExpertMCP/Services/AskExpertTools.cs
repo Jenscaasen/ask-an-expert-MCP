@@ -42,7 +42,7 @@ public sealed class AskExpertTools
             {
                 new { role = "user", content = question }
             },
-            temperature = 0.4
+            temperature = 1
         };
 
         return await PerformApiCall(payload);
@@ -80,7 +80,7 @@ public sealed class AskExpertTools
                     }
                 }
             },
-            temperature = 0.4
+            temperature = 1
         };
 
         return await PerformApiCall(payload);
